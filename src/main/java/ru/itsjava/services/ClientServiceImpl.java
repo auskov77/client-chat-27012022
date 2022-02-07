@@ -2,6 +2,7 @@ package ru.itsjava.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.apache.log4j.Logger;
 
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -14,6 +15,9 @@ public class ClientServiceImpl implements ClientService {
     private PrintWriter serverWriter;
     private MessageInputService messageInputService;
     public Socket socket;
+
+    // Инициализация логера
+    private static final Logger log = Logger.getLogger(ClientServiceImpl.class);
 
     @SneakyThrows
     @Override
@@ -58,6 +62,9 @@ public class ClientServiceImpl implements ClientService {
                 // из messageInputService должны получать сообщение, которое написал пользователь
                 String consoleMessage = messageInputService.getMessage();
 
+                // логируем инфо
+                log.info("Сообщение отправлено на сервер: " + consoleMessage);
+
                 isExit = consoleMessage.equals("exit");
                 // проверка ввода клиентом слова "exit", чтобы покинуть чат
                 if (isExit) {
@@ -69,7 +76,8 @@ public class ClientServiceImpl implements ClientService {
                 // кто-то ввел сообщение consoleMessage, и мы должны отправить - serverWriter
                 serverWriter.println(consoleMessage);
                 serverWriter.flush(); // скинуть буферизированные данные в поток
-            }
+
+           }
         }
     }
 
@@ -92,5 +100,8 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public void exitChat() {
         System.exit(0);
+
+        // логируем инфо
+        log.info("Клиент покинул чат");
     }
 }
