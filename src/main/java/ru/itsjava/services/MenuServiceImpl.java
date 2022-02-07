@@ -17,16 +17,13 @@ public class MenuServiceImpl implements MenuService {
         Scanner console = new Scanner(System.in);
 
         System.out.println("Выберите пункт из меню");
-//        numMenu = console.nextInt();
 
         switch (console.nextInt()) {
-//        if (numMenu == 1) {
             case 1: {
                 System.out.println("Вы выбрали авторизацию");
                 numMenu = 1;
                 break;
             }
-//        else if (numMenu == 2) {
             case 2: {
                 System.out.println("Вы выбрали регистрацию");
                 numMenu = 2;
@@ -37,14 +34,6 @@ public class MenuServiceImpl implements MenuService {
                 numMenu = 3;
                 break;
             }
-
-//        if (menuNum.equals("1")) {
-//            System.out.println("Вы выбрали авторизацию");
-//            clientService.authorizationUser();
-//        } else if (menuNum.equals("2")) {
-//            System.out.println("Вы выбрали регистрацию");
-//            clientService.registrationNewUser();
-//        }
         }
     }
 
