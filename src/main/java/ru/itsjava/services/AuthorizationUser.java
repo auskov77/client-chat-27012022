@@ -2,6 +2,7 @@ package ru.itsjava.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+
 import java.io.PrintWriter;
 
 @RequiredArgsConstructor
@@ -13,6 +14,7 @@ public class AuthorizationUser implements Runnable {
     @SneakyThrows
     @Override
     public void run() {
+        int count = 0;
         while (true) {
             System.out.println("Введите свой логин:");
             String login = console.getMessage();
@@ -23,9 +25,15 @@ public class AuthorizationUser implements Runnable {
 
             String messageFromSerever = serverReader.getMessage();
             System.out.println(messageFromSerever);
-            if (!messageFromSerever.contains("Вы не авторизованы")){
+            if (!messageFromSerever.contains("Вы не авторизованы")) {
                 break;
+            } else {
+                count++;
+                if (count == 3) {
+                    System.exit(0);
+                }
             }
+
         }
     }
 }
